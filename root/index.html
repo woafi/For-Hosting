@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song List</title>
+</head>
+<body>
+    <h1>Song List</h1>
+    <ul id="song-list"></ul>
+
+    <script>
+        // Fetch song list from the server
+        fetch('/getData')
+            .then(response => response.json())
+            .then(songs => {
+                const songList = document.getElementById('song-list');
+                songs.forEach((song, index) => {
+                    const li = document.createElement('li');
+                    li.textContent = `${index + 1}. ${song}`;
+                    songList.appendChild(li);
+                });
+            })
+            .catch(error => console.error('Error fetching songs:', error));
+    </script>
+</body>
+</html>
